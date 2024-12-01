@@ -18,6 +18,7 @@ const homeRouter = require('./routes/login');
 
 
 
+
 const passportConfig = require('./passport');   // Passport 설정 파일을 불러옵니다.
 
 const app = express();  // express 애플리케이션 객체 생성
@@ -52,6 +53,7 @@ app.use(passport.session());    // 세션을 passport와 연결
 // 라우터 등록
 // ex) app.use('/', pageRouter);
 app.use('/', homeRouter);
+
 
 
 
