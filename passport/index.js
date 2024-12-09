@@ -1,3 +1,4 @@
+// passport/index.js
 const passport = require('passport');
 const local = require('./localStrategy');   // ./localStrategy에서 정의한 로컬 인증전략을 가져옴
 const db = require(process.cwd() + '/models');
@@ -10,20 +11,23 @@ module.exports = () => {
 
     passport.deserializeUser(async (id, done) => {
         try {
-            const [rows] = await db.execute('SELECT id, nickname FROM users WHERE id=?', [id]);
-            if (rows.length > 0) {
+            const [rows] = await db.execute('SELECT id,username FROM users WHERE id=?', [id]);
+            if (!Array.isArray(rows)) {
+                throw new Error('Unexpected database response'); // 예기치 않은 응답 처리
+            }
+            if (rows.length > 0) {  // 해당 id에 대한 사용자가 존재하면
                 const user = rows[0];
-                // const [followings] = await db.execute('SELECT u.id, u.nick FROM users u, follow f WHERE f.followerId=? AND u.id=f.followingId', [user.id]);
-                // const [followers] = await db.execute('SELECT u.id, u.nick FROM users u, follow f WHERE f.followingId=? AND u.id=f.followerId', [user.id]);
-                // user.followings = followings;
-                // user.followers = followers;
                 done(null, user);
-            } else done(null);
+            } else {
+                done(null, false); // 사용자 없음 처리
+            }
         } catch (err) {
             console.error(err);
             done(err);
         }
     });
+
+
 
     local();
 }

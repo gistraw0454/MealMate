@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<section class="group-page">
+    <div class="group-list">
+        <h3>내가 가입한 그룹</h3>
+        <ul>
+            {% for group in groups %}
+            <li>
+                <a href="/my-groups?groupId={{ group.id }}">{{ group.groupName }} ({{ group.category }})</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="group-details">
+        {% if selectedGroup %}
+        <h3>{{ selectedGroup.groupName }}</h3>
+        <p>분류: {{ selectedGroup.category }}</p>
+        <p>그룹장: {{ selectedGroup.ownerName }}</p>
+        <ul>
+            <h4>멤버</h4>
+            {% for member in selectedGroup.members %}
+            <li>{{ member }}</li>
+            {% endfor %}
+        </ul>
+        <form action="/group/leave/{{ selectedGroup.id }}" method="post">
+            <button type="submit">그룹 나가기</button>
+        </form>
+        {% if userIsOwner %}
+        <form action="/group/delete/{{ selectedGroup.id }}" method="post">
+            <button type="submit">그룹 삭제</button>
+        </form>
+        <form action="/group/change-category/{{ selectedGroup.id }}" method="post">
+            <select name="newCategory">
+                <option value="한식">한식</option>
+                <option value="중식">중식</option>
+                <option value="일식">일식</option>
+                <option value="양식">양식</option>
+            </select>
+            <button type="submit">분류 변경</button>
+        </form>
+
+        <form action="/group/recommend/{{ selectedGroup.id }}" method="post">
+            <button type="submit">메뉴 추천</button>
+        </form>
+        {% endif %}
+        {% else %}
+        <p>그룹을 선택해주세요.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

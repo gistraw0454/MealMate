@@ -1,3 +1,4 @@
+// models/app.js
 const mysql = require('mysql2');
 const env = process.env.NODE_ENV || 'development';
 const config = require(process.cwd() + '/config/config.json')[env];

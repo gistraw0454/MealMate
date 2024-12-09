@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<section class="auth-form">
+    <h2>회원가입</h2>
+    <form action="/auth/join" method="post">
+        <input type="text" name="username" placeholder="아이디" required>
+        <input type="password" name="password" placeholder="비밀번호" required>
+        <input type="email" name="email" placeholder="이메일" required>
+        <button type="submit">회원가입</button>
+    </form>
+</section>
+{% endblock %}

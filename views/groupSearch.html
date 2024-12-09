@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<section class="group-page">
+    <div class="group-list">
+        <h3>그룹 리스트</h3>
+        <ul>
+            {% for group in groups %}
+            <li>{{ group.groupName }} ({{ group.category }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="group-create">
+        <h3>그룹 생성</h3>
+        <form action="/group/create" method="post">
+            <input type="text" name="groupName" placeholder="그룹 이름" required>
+            <input type="password" name="password" placeholder="비밀번호" required>
+            <select name="category">
+                <option value="한식">한식</option>
+                <option value="중식">중식</option>
+                <option value="일식">일식</option>
+                <option value="양식">양식</option>
+            </select>
+            <button type="submit">그룹 생성</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
