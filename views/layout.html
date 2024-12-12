@@ -14,7 +14,7 @@
             {% if user %}
             <li><a href="/my-groups">내 그룹</a></li>
             <li><a href="/group-search">그룹 찾기</a></li>
-            <li><a href="/meal-log">식사 로그</a></li>
+            <li><a href="/profile">내 정보</a></li>
             <li><a href="/auth/logout">로그아웃</a></li>
             {% else %}
             <li><a href="/auth/login">로그인</a></li>
@@ -28,5 +28,18 @@
     {{ body | safe }}
     {% endblock %}
 </main>
+<script>
+    // URL에서 error 파라미터 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+
+    // 에러 메시지가 있는 경우 경고 팝업 표시
+    if (error === 'not_logged_in') {
+        alert('로그인된 사용자가 아닙니다.');
+    }
+    if (error === 'already_in_group'){
+        alert('이미 참여한 그룹입니다.');
+    }
+</script>
 </body>
 </html>

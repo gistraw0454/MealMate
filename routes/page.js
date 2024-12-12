@@ -14,7 +14,4 @@ router.get('/group-search', renderGroupSearchPage);
 // 내 그룹 페이지
 router.get('/my-groups', renderMyGroupsPage);
 
-// 식사 로그 페이지
-router.get('/meal-log', renderMealLogPage);
-
 module.exports = router;

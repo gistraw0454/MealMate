@@ -15,7 +15,7 @@ const passportConfig = require('./passport'); // Passport 설정
 const pageRouter = require('./routes/page'); // 메인, 그룹 찾기, 내 그룹 페이지
 const authRouter = require('./routes/auth'); // 로그인, 회원가입, 로그아웃
 const groupRouter = require('./routes/group'); // 그룹 생성, 삭제, 나가기 등
-const userRouter = require('./routes/user'); // 사용자 관련 라우팅
+const userRouter = require('./routes/profile'); // 사용자 관련 라우팅
 
 const app = express();
 passportConfig(); // Passport 초기화
@@ -52,8 +52,9 @@ app.use(passport.session()); // 세션에 Passport 정보 저장
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
 app.use('/group', groupRouter);
-app.use('/user', userRouter);
-
+// app.use('/user', userRouter);
+const profileRouter = require('./routes/profile');
+app.use('/profile', profileRouter);
 // 에러 처리
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

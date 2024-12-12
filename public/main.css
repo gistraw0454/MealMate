@@ -1,85 +1,240 @@
+/* 전체 스타일 */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #FFE4E1; /* 연분홍 배경 */
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #fbe5e8;
+    color: #333;
 }
 
 header {
-    background-color: #FFB6C1;
-    padding: 10px;
-}
-
-header nav {
+    background-color: #ff8ba7;
+    color: #fff;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-header nav h1 a {
-    color: white;
+header h1 a {
     text-decoration: none;
-    font-size: 24px;
+    color: #fff;
+    font-size: 1.5rem;
 }
 
-header nav ul {
+header ul {
     list-style: none;
-    display: flex;
     margin: 0;
     padding: 0;
+    display: flex;
+    gap: 1rem;
 }
 
-header nav ul li {
-    margin-left: 15px;
-}
-
-header nav ul li a {
+header ul li a {
+    color: #fff;
     text-decoration: none;
-    color: white;
+    font-weight: bold;
 }
 
 main {
-    padding: 20px;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* 폼 스타일 */
 .auth-form {
-    max-width: 400px;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid #ff8ba7;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #ffe3e8;
 }
 
 .auth-form h2 {
-    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #ff8ba7;
 }
 
-.auth-form input, .auth-form button {
+.auth-form input {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 .auth-form button {
-    background: #FF69B4;
-    color: white;
+    background-color: #ff8ba7;
+    color: #fff;
     border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+.auth-form button:hover {
+    background-color: #e47c97;
+}
+
+/* 그룹 페이지 스타일 */
 .group-page {
     display: flex;
-    gap: 20px;
+    gap: 2rem;
 }
 
-.group-list, .group-details {
+.group-list, .group-create, .group-details {
     flex: 1;
+    padding: 1rem;
+    background-color: #ffe3e8;
+    border: 1px solid #ff8ba7;
+    border-radius: 10px;
+}
+
+.group-list h3, .group-create h3, .group-details h3 {
+    color: #ff8ba7;
 }
 
 .group-list ul, .group-details ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+
+.group-list li, .group-details li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group-list form, .group-details form {
+    display: inline;
+}
+
+.group-create input, .group-create select, .group-create button {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.group-create input{
+    width: 96%;
+}
+
+.group-create button {
+    background-color: #ff8ba7;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.group-create button:hover {
+    background-color: #e47c97;
+}
+
+/* 메뉴 체크리스트 */
+.menu-checklist-container {
+    margin-top: 1rem;
+}
+
+#menu-checklist {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #ff8ba7;
+    border-radius: 10px;
+}
+
+#menu-checklist div {
+    margin-bottom: 0.5rem;
+}
+
+button#show-checklist-button, button#recommend-menu-button {
+    background-color: #ff8ba7;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button#show-checklist-button:hover, button#recommend-menu-button:hover {
+    background-color: #e47c97;
+}
+
+#recommended-menu {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #ff8ba7;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .group-page {
+        flex-direction: column;
+    }
+
+    .auth-form {
+        width: 100%;
+    }
+}
+
+
+
+.profile-form {
+    width: 400px;
+    margin: 0 auto;
+    text-align: left;
+    padding: 2rem;
+    border: 1px solid #ff8ba7;
+    border-radius: 10px;
+    background-color: #ffe3e8;
+}
+
+.profile-form h2 {
+    margin-bottom: 1.5rem;
+    color: #ff8ba7;
+    text-align: center;
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.profile-form input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.profile-form button {
+    background-color: #ff8ba7;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.profile-form button:hover {
+    background-color: #e47c97;
 }

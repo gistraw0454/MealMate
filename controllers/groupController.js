@@ -7,11 +7,21 @@ exports.createGroup = async (req, res, next) => {
         const { groupName, password, category } = req.body;
         const ownerId = req.user.id;
 
+        // 그룹 생성
         const query = `
             INSERT INTO user_groups (group_name, password, category, owner_id)
             VALUES (?, ?, ?, ?)
         `;
-        await db.execute(query, [groupName, password, category, ownerId]);
+        const [result] = await db.execute(query, [groupName, password, category, ownerId]);
+        const groupId = result.insertId; // 생성된 그룹의 ID 가져오기
+
+        // 그룹 소유자를 멤버로 추가
+        const addMemberQuery = `
+            INSERT INTO group_members (group_id, user_id)
+            VALUES (?, ?)
+        `;
+        await db.execute(addMemberQuery, [groupId, ownerId]);
+
         res.redirect('/group-search');
     } catch (error) {
         console.error(error);
@@ -91,7 +101,7 @@ exports.joinGroup = async (req, res, next) => {
             [groupId, userId]
         );
         if (rows.length > 0) {
-            return res.status(400).send('이미 그룹에 참여하였습니다.');
+            return res.redirect('/group-search?error=already_in_group');
         }
 
         // 그룹에 사용자 추가
@@ -100,7 +110,7 @@ exports.joinGroup = async (req, res, next) => {
             [groupId, userId]
         );
 
-        res.redirect('/group-search'); // 성공 후 그룹 찾기 페이지로 리다이렉트
+        res.redirect('/my-groups'); // 성공 후 내 그룹으로 리다이렉트하기
     } catch (err) {
         console.error('그룹 참여 중 에러:', err);
         next(err);

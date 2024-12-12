@@ -25,7 +25,7 @@ exports.renderGroupSearchPage = async (req, res, next) => {
 exports.renderMyGroupsPage = async (req, res, next) => {
     try {
         if (!req.user) {
-            throw new Error('로그인된 사용자가 아닙니다.');
+            return res.redirect('/?error=not_logged_in');
         }
 
         const userId = req.user.id;
@@ -82,27 +82,3 @@ exports.renderMyGroupsPage = async (req, res, next) => {
     }
 };
 
-
-// 식사 로그 페이지
-exports.renderMealLogPage = async (req, res, next) => {
-    try {
-        const userId = req.user.id;
-
-        const query = `
-            SELECT g.group_name AS groupName, g.category
-            FROM user_groups AS g
-            JOIN group_members AS gm ON g.id = gm.group_id
-            WHERE gm.user_id = ?
-        `;
-        const [groups] = await db.execute(query, [userId]);
-
-        res.render('mealLog', {
-            title: '식사 로그 - 밥머먹꼬',
-            user: req.user,
-            groups,
-        });
-    } catch (error) {
-        console.error(error);
-        next(error);
-    }
-};
