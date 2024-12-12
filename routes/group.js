@@ -5,7 +5,8 @@ const {
     recommendMenu,
     changeCategory,
     leaveGroup,
-    excludeMenu,
+    excludeMenu ,
+    joinGroup,
 } = require('../controllers/groupController');
 const { isLoggedIn } = require('../middlewares');
 const router = express.Router();
@@ -22,11 +23,14 @@ router.post('/recommend/:groupId', isLoggedIn, recommendMenu);
 // 분류 변경
 router.post('/change-category/:groupId', isLoggedIn, changeCategory);
 
+// 그룹 참여
+router.post('/join/:groupId', isLoggedIn, joinGroup);
+
 
 // 그룹 나가기
 router.post('/leave/:groupId', isLoggedIn, leaveGroup);
 
 // 메뉴 제외
-router.post('/exclude/:groupId', isLoggedIn, excludeMenu);
+router.post('/exclude-menu/:groupId', isLoggedIn, excludeMenu);
 
 module.exports = router;

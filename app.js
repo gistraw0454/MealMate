@@ -34,7 +34,7 @@ nunjucks.configure('views', {
 app.use(morgan('dev')); // 개발환경 로그 출력
 app.use(express.static(path.join(__dirname, 'public'))); // 정적 파일 제공
 app.use(express.json()); // JSON 요청 처리
-app.use(express.urlencoded({ extended: false })); // URL-encoded 요청 처리
+app.use(express.urlencoded({ extended: true })); // URL-encoded 요청 처리
 app.use(cookieParser(process.env.COOKIE_SECRET)); // 쿠키 파싱
 app.use(session({
     resave: false, // 세션 데이터가 변경되지 않으면 저장 안 함

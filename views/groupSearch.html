@@ -7,6 +7,9 @@
         <ul>
             {% for group in groups %}
             <li>{{ group.groupName }} ({{ group.category }})</li>
+            <form action="/group/join/{{ group.id }}" method="post" style="display: inline;">
+                <button type="submit">참여하기</button>
+            </form>
             {% endfor %}
         </ul>
     </div>
