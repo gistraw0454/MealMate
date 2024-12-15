@@ -6,12 +6,12 @@ const defaultMenus = require(path.join(__dirname, '../data/defaultMenus.json'));
 exports.renderGroupSearchPage = async (req, res, next) => {
     try {
         const query = `
-            SELECT id, group_name AS groupName, category
+            SELECT id,group_name AS groupName, category
             FROM user_groups
         `;
-        const [groups] = await db.execute(query);
+        const [groups] = await db.execute(query);   // 쿼리문 실행결과
         res.render('groupSearch', {
-            title: '그룹 찾기 - 밥머먹꼬',
+            title: '그룹 찾기 - 밥머물꼬',
             user: req.user,
             groups,
         });
@@ -32,11 +32,12 @@ exports.renderMyGroupsPage = async (req, res, next) => {
 
         // 사용자가 참여한 그룹 및 생성한 그룹 가져오기
         const query = `
-            SELECT g.id, g.group_name AS groupName, g.category
+            SELECT DISTINCT g.id, g.group_name AS groupName, g.category
             FROM user_groups AS g
                      LEFT JOIN group_members AS gm ON g.id = gm.group_id
             WHERE gm.user_id = ? OR g.owner_id = ?
         `;
+
         const [groups] = await db.execute(query, [userId, userId]);
 
         const selectedGroupId = req.query.groupId;
@@ -60,10 +61,10 @@ exports.renderMyGroupsPage = async (req, res, next) => {
                          JOIN group_members AS gm ON u.id = gm.user_id
                 WHERE gm.group_id = ?
             `;
-            const [members] = await db.execute(membersQuery, [selectedGroupId]);
+            const [members] = await db.execute(membersQuery, [selectedGroupId]);    // 그룹아이디가 선택한그룹아이디랑 같은 user_id로 조인해서 user.username을 가져온다.
 
             selectedGroup.members = members.map((m) => m.username);
-            userIsOwner = selectedGroup.ownerId === req.user.id;
+            userIsOwner = selectedGroup.ownerId === req.user.id;    // 오너 == 나
 
             // JSON에서 category에 따른 메뉴 가져오기
             selectedGroup.menus = defaultMenus[selectedGroup.category] || [];

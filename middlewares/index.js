@@ -1,8 +1,9 @@
+//middlewares/index.js
 exports.isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated()) {    // isAuthenticated == 1이면 next()
         next();
-    } else {
-        return res.redirect(`/?error=not_logged_in`);
+    } else {    // isAuthenticated == 0 로그인 X
+        return res.redirect(`/?error=not_logged_in`);   // 미들웨어 끝
     }
 };
 

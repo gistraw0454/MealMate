@@ -5,7 +5,7 @@ const router = express.Router();
 
 // 메인 페이지
 router.get('/', (req, res) => {
-    res.render('layout', { title: '밥머먹꼬', user: req.user });
+    res.render('layout', { title: '밥머물꼬', user: req.user });
 });
 
 // 그룹 찾기 페이지

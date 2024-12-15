@@ -15,14 +15,32 @@
     <div class="group-details">
         {% if selectedGroup %}
         <h3>{{ selectedGroup.groupName }}</h3>
+        <h4>그룹장: {{ selectedGroup.ownerName }}</h4>
         <p>분류: {{ selectedGroup.category }}</p>
-        <p>그룹장: {{ selectedGroup.ownerName }}</p>
+        {% if userIsOwner %}
+        <form action="/group/change-category/{{ selectedGroup.id }}" method="post">
+            <select name="newCategory">
+                <option value="한식">한식</option>
+                <option value="중식">중식</option>
+                <option value="일식">일식</option>
+                <option value="양식">양식</option>
+            </select>
+            <button type="submit">분류 변경</button>
+        </form>
+        {% endif %}
+
         <ul>
             <h4>멤버</h4>
             {% for member in selectedGroup.members %}
             <li>{{ member }}</li>
             {% endfor %}
         </ul>
+
+        <div>
+            <p id="recommended-menu">오늘의 추천 메뉴: </p>
+            <button id="recommend-menu-button">메뉴 추천</button>
+
+        </div>
         <div class="menu-checklist-container">
             <button id="show-checklist-button">제외 선택</button>
             <div id="menu-checklist" style="display: none;">
@@ -38,24 +56,13 @@
                 </form>
             </div>
         </div>
-        <div>
-            <button id="recommend-menu-button">메뉴 추천</button>
-            <p id="recommended-menu">오늘의 추천 메뉴: </p>
-        </div>
+
 
         {% if userIsOwner %}
         <form action="/group/delete/{{ selectedGroup.id }}" method="post">
-            <button type="submit">그룹 삭제</button>
+            <button id="delete" type="submit">그룹 삭제</button>
         </form>
-        <form action="/group/change-category/{{ selectedGroup.id }}" method="post">
-            <select name="newCategory">
-                <option value="한식">한식</option>
-                <option value="중식">중식</option>
-                <option value="일식">일식</option>
-                <option value="양식">양식</option>
-            </select>
-            <button type="submit">분류 변경</button>
-        </form>
+
         {% else %}
         <form action="/group/leave/{{ selectedGroup.id }}" method="post">
             <button type="submit">그룹 나가기</button>

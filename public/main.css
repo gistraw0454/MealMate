@@ -44,6 +44,22 @@ main {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+/* 공통 버튼 스타일 */
+button {
+    background-color: #ff8ba7;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #e47c97;
+}
 
 /* 폼 스타일 */
 .auth-form {
@@ -62,7 +78,7 @@ main {
 }
 
 .auth-form input {
-    width: 100%;
+    width: 94%;
     padding: 0.5rem;
     margin-bottom: 1rem;
     border: 1px solid #ccc;
@@ -70,6 +86,7 @@ main {
 }
 
 .auth-form button {
+    width: 100%;
     background-color: #ff8ba7;
     color: #fff;
     border: none;
@@ -127,7 +144,7 @@ main {
 }
 
 .group-create input{
-    width: 96%;
+    width: 95%;
 }
 
 .group-create button {
@@ -141,10 +158,7 @@ main {
     background-color: #e47c97;
 }
 
-/* 메뉴 체크리스트 */
-.menu-checklist-container {
-    margin-top: 1rem;
-}
+
 
 #menu-checklist {
     display: none;
@@ -159,7 +173,7 @@ main {
     margin-bottom: 0.5rem;
 }
 
-button#show-checklist-button, button#recommend-menu-button {
+button#show-checklist-button, button#recommend-menu-button,button#delete {
     background-color: #ff8ba7;
     color: #fff;
     border: none;
@@ -170,7 +184,7 @@ button#show-checklist-button, button#recommend-menu-button {
     transition: background-color 0.3s ease;
 }
 
-button#show-checklist-button:hover, button#recommend-menu-button:hover {
+button#show-checklist-button:hover, button#recommend-menu-button:hover,button#delete:hover {
     background-color: #e47c97;
 }
 
@@ -216,7 +230,7 @@ button#show-checklist-button:hover, button#recommend-menu-button:hover {
 }
 
 .profile-form input {
-    width: 100%;
+    width: 95%;
     padding: 0.5rem;
     margin-bottom: 1rem;
     border: 1px solid #ccc;
@@ -237,4 +251,34 @@ button#show-checklist-button:hover, button#recommend-menu-button:hover {
 
 .profile-form button:hover {
     background-color: #e47c97;
+}
+
+.group-details select {
+    width: 22%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #333;
+    appearance: none; /* 기본 드롭다운 스타일 제거 */
+    -webkit-appearance: none; /* Safari에서 기본 스타일 제거 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23ff8ba7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.5rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.group-details select:focus {
+    border-color: #ff8ba7;
+    box-shadow: 0 0 5px rgba(255, 139, 167, 0.5);
+    outline: none;
+}
+
+.group-details select option {
+    padding: 0.5rem;
+    background-color: #fff;
+    color: #333;
 }

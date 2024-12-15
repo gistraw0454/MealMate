@@ -4,13 +4,14 @@ const bcrypt = require('bcrypt');
 // 프로필 페이지 렌더링
 exports.renderProfilePage = async (req, res, next) => {
     try {
-        const { username, email } = req.user; // 닉네임 제거
+        const { username, email } = req.user;
+        console.log(req.user);
         res.render('profile', {
             title: '프로필 관리',
             user: { username, email }
         });
     } catch (err) {
-        console.error(err);
+        console.error(err);-
         next(err);
     }
 };
